@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <!-- Telegram Web App Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Your Monetag SDK integration -->
+    <script src='//libtl.com/sdk.js' data-zone='11232730' data-sdk='show_11232730'></script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f4f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 24px;
+            color: #000000;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .btn {
+            border: none;
+            color: white;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn:active {
+            opacity: 0.8;
+        }
+        /* Color matching based on Screenshot_20260703_173014_Telegram.jpg */
+        .btn-blue { background-color: #007bff; }
+        .btn-green { background-color: #28a745; }
+        .btn-yellow { background-color: #ffc107; color: #ffffff; }
+        .btn-red { background-color: #dc3545; }
+        
+        .btn-full {
+            grid-column: span 2;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        .btn-cyan { background-color: #17a2b8; }
+        .btn-grey { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Watch Ads</h2>
+        
+        <div class="btn-grid">
+            <button class="btn btn-blue" onclick="showMonetagAd()">Watch Ad 1</button>
+            <button class="btn btn-green" onclick="showMonetagAd()">Watch Ad 2</button>
+            <button class="btn btn-yellow" onclick="showMonetagAd()">Watch Ad 3</button>
+            <button class="btn btn-red" onclick="showMonetagAd()">Watch Ad 4</button>
+        </div>
+        
+        <button class="btn btn-cyan btn-full" onclick="showMonetagAd()">Watch Rewarded Ad</button>
+        <button class="btn btn-grey btn-full" onclick="showMonetagAd()">Watch Rewarded Popup</button>
+    </div>
+
+    <script>
+        // Initialize Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Expands the application interface to full viewport height
+
+        // Monetag Ad Trigger Logic using your SDK function
+        function showMonetagAd() {
+            // Checks if your Monetag SDK function 'show_11232730' is successfully loaded
+            if (typeof show_11232730 === 'function') {
+                show_11232730().then(() => {
+                    // Script executed after ad is completed or closed
+                    console.log('Ad finished successfully');
+                }).catch((error) => {
+                    console.error('Ad failed to load or skipped:', error);
+                });
+            } else {
+                alert("Ad is loading... Please try again in a few moments.");
+            }
+        }
+    </script>
+</body>
+</html>
+
